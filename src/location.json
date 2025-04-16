@@ -1,0 +1,47 @@
+{
+    "countries": [
+      { "country": "India" },
+      { "country": "USA" },
+      { "country": "Canada" },
+      { "country": "Australia" },
+      { "country": "Germany" }
+    ],
+    "states": [
+      { "country": "India", "state": "Maharashtra" },
+      { "country": "India", "state": "Punjab" },
+      { "country": "USA", "state": "California" },
+      { "country": "USA", "state": "Texas" },
+      { "country": "Canada", "state": "Ontario" },
+      { "country": "Canada", "state": "Quebec" },
+      { "country": "Australia", "state": "New South Wales" },
+      { "country": "Australia", "state": "Victoria" },
+      { "country": "Germany", "state": "Bavaria" },
+      { "country": "Germany", "state": "Berlin" }
+    ],
+    "cities": [
+      { "country": "India", "state": "Maharashtra", "city": "Mumbai" },
+      { "country": "India", "state": "Maharashtra", "city": "Pune" },
+      { "country": "India", "state": "Punjab", "city": "Ludhiana" },
+      { "country": "India", "state": "Punjab", "city": "Amritsar" },
+      
+      { "country": "USA", "state": "California", "city": "Los Angeles" },
+      { "country": "USA", "state": "California", "city": "San Francisco" },
+      { "country": "USA", "state": "Texas", "city": "Austin" },
+      { "country": "USA", "state": "Texas", "city": "Houston" },
+      
+      { "country": "Canada", "state": "Ontario", "city": "Toronto" },
+      { "country": "Canada", "state": "Ontario", "city": "Ottawa" },
+      { "country": "Canada", "state": "Quebec", "city": "Montreal" },
+      { "country": "Canada", "state": "Quebec", "city": "Quebec City" },
+      
+      { "country": "Australia", "state": "New South Wales", "city": "Sydney" },
+      { "country": "Australia", "state": "New South Wales", "city": "Newcastle" },
+      { "country": "Australia", "state": "Victoria", "city": "Melbourne" },
+      { "country": "Australia", "state": "Victoria", "city": "Geelong" },
+      
+      { "country": "Germany", "state": "Bavaria", "city": "Munich" },
+      { "country": "Germany", "state": "Bavaria", "city": "Nuremberg" },
+      { "country": "Germany", "state": "Berlin", "city": "Berlin" }
+    ]
+  }
+  

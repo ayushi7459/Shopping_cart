@@ -1,0 +1,112 @@
+
+    [
+      {
+        "id":1,
+        "name": "Sonic Lamb Headphones with Built-in Subwoofers to Feel Your Music",
+        "price": 59.99,
+        "imageUrl": "https://m.media-amazon.com/images/I/51aq7Qei6dL.jpg"
+      },
+      {
+        "id":2,
+        "name": "iPhone 16 128GB White",
+        "price": 499.99,
+        "imageUrl": "https://media.wired.com/photos/62d75d34ddaaa99a1df8e61d/4:3/w_2400,h_1800,c_limit/Phone-Camera-Webcam-Gear-GettyImages-1241495650.jpg"
+      },
+      {
+        "id":3,
+        "name": "ASUS ROG Strix Scar 16 (2024), Gaming Laptop, Intel Core i9 14900HX 14th Gen",
+        "price": 899.99,
+        "imageUrl": "https://m.media-amazon.com/images/I/71iyBsDDwQL._SX569_.jpg"
+      },
+      {
+        "id":4,
+        "name": "Smart Watch",
+        "price": 199.99,
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZLizzjlyFLrCYxrG62OXCDLbkJ58mWJi-rw&s"
+      },
+      {
+        "id":5,
+        "name": "boAt Stone 352/358 Bluetooth Speaker with 10W RMS Stereo Sound, IPX7 Water Resistance",
+        "price": 79.99,
+        "imageUrl": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSnc3lQ7N41aAO3x6R8KM-rKz3gMIrAlL-ZcFLRUKh3OkBav9qPlx1qH_K5iKuhAN-SXOrjILAD7skdfF6AMQ9-E7h0qXghhnKzb47mURwM246eXNUhHe1oDq-E9F9aJ4mx_B0VV_M&usqp=CAc"
+      },
+      {
+        "id":6,
+        "name": "Alienware Tri-Mode Wireless Gaming Mouse - AW720M",
+        "price": 49.99,
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR9e3TqsmLqL7O2U1VVp7jCmN8EW76dDTmOQ&s"
+      },
+      {
+        "id":7,
+        "name": "Hive Black -Purple Wired Gaming Keyboard",
+        "price": 129.99,
+        "imageUrl": "https://kreo-tech.com/cdn/shop/files/9_2bcddf3e-927c-4891-ab18-3e6cc8985e9b.png?v=1742568353"
+      },
+      {
+        "id":8,
+        "name": "LED Monitor",
+        "price": 179.99,
+        "imageUrl": "https://rukminim3.flixcart.com/image/850/1000/xif0q/monitor/e/x/t/ls22a33anhwxxl-full-hd-22-ls22a33anhwxxl-samsung-original-imagk9whgxmmhqqz.jpeg?q=90&crop=false"
+      },
+      {
+        "id":9,
+        "name": "External Hard Drive",
+        "price": 99.99,
+        "imageUrl":"https://m.media-amazon.com/images/I/71iIr9koTGL.jpg"
+      },
+      {
+        "id":10,
+        "name": "Wireless Earbuds",
+        "price": 69.99,
+        "imageUrl": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MUVX3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1713296133678"
+      },
+      {
+        "id":11,
+        "name": "LED Monitor",
+        "price": 179.99,
+        "imageUrl": "https://rukminim3.flixcart.com/image/850/1000/xif0q/monitor/e/x/t/ls22a33anhwxxl-full-hd-22-ls22a33anhwxxl-samsung-original-imagk9whgxmmhqqz.jpeg?q=90&crop=false"
+      },
+      {
+        "id":12,
+        "name": "External Hard Drive",
+        "price": 99.99,
+        "imageUrl": "https://m.media-amazon.com/images/I/71iIr9koTGL.jpg"
+      },
+      {
+        "id":13,
+        "name": "Wireless Earbuds",
+        "price": 69.99,
+        "imageUrl": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MUVX3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1713296133678"
+      },
+      {
+        "id":14,
+        "name": "Wireless Headphones",
+        "price": 59.99,
+        "imageUrl": "https://m.media-amazon.com/images/I/51aq7Qei6dL.jpg" 
+      },
+      {
+        "id":15,
+        "name": "Gaming Mouse",
+        "price": 49.99,
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR9e3TqsmLqL7O2U1VVp7jCmN8EW76dDTmOQ&s"
+      },
+      {
+        "id":16,
+        "name": "Lenovo {Smartchoice) Tab Plus with Octa JBL Hi-Fi Speakers| 8 GB RAM, 256 GB ROM| 11.5 Inch, 2K, 90 Hz Refresh",
+        "price": 49.99,
+        "imageUrl":"https://m.media-amazon.com/images/I/61OXB0vbYPL._SX425_.jpg"
+      },
+      {
+        "id":17,
+        "name": "Panasonic LUMIX G7 16.00 MP 4K Mirrorless Interchangeable Lens Camera Kit with 14-42 mm Lens",
+        "price": 49.99,
+        "imageUrl":"https://m.media-amazon.com/images/I/91xnO7qHAeL._SX425_.jpg"
+      },
+      {
+       "id":18,
+        "name": "Juârez Acoustic Guitar Kit, 38 Inch Cutaway, 038C with Bag, Strings, Pick and Strap, Black",
+        "price": 49.99,
+        "imageUrl":"https://m.media-amazon.com/images/I/71y1TJbygLL._SX522_.jpg" 
+      }
+    ]
+  
