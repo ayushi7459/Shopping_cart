@@ -1,0 +1,127 @@
+[
+    {
+        "id": 1,
+        "child": [
+            {
+                "id": 6,
+                "name": "Mammals"
+            },
+            {
+                "id": 7,
+                "name": "Birds"
+            },
+            {
+                "id": 8,
+                "name": "Reptiles"
+            },
+            {
+                "id": 10,
+                "name": "Amphibians"
+            },
+            {
+                "id": 11,
+                "name": "Fish"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "child": [
+            {
+                "id": 12,
+                "name": "Laptop"
+            },
+            {
+                "id": 13,
+                "name": "Phone"
+            },
+            {
+                "id": 14,
+                "name": "Smart watches"
+            },
+            {
+                "id": 15,
+                "name": "Airpods"
+            },
+            {
+                "id": 16,
+                "name": "Speaker"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "child": [
+            {
+                "id": 17,
+                "name": "India"
+            },
+            {
+                "id": 18,
+                "name": "USA"
+            },
+            {
+                "id": 19,
+                "name": "Canada"
+            },
+            {
+                "id": 20,
+                "name": "Australia"
+            },
+            {
+                "id": 21,
+                "name": "Germany"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "child": [
+            {
+                "id": 22,
+                "name": "Red"
+            },
+            {
+                "id": 23,
+                "name": "Green"
+            },
+            {
+                "id": 24,
+                "name": "Blue"
+            },
+            {
+                "id": 25,
+                "name": "Black"
+            },
+            {
+                "id": 26,
+                "name": "White"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "child": [
+            {
+                "id": 27,
+                "name": "selenophile"
+            },
+            {
+                "id": 28,
+                "name": "Astrophile"
+            },
+            {
+                "id": 29,
+                "name": "Nyctophile"
+            },
+            {
+                "id": 30,
+                "name": "Ceraunophile"
+            },
+            {
+                "id": 31,
+                "name": "pluviophiles"
+            }
+        ]
+    }
+]

@@ -5,6 +5,7 @@ import Dashboard from "./components/dashboard"
 import Carts from "./components/Carts"
 import './index.css';
 import List from "./components/listPage";
+import Dropdown_menu  from "./components/dropdown";
 
 
 
@@ -17,6 +18,7 @@ const App=() =>{
       <Route path="/" element={<Dashboard />} />
       <Route path="/cart" element={<Carts/>}/>
       <Route path="/userlist" element={<List/>}/>
+      <Route path="/dropdown_menu" element={<Dropdown_menu/>}/>
     </Routes>
   </BrowserRouter>
   </Provider>
