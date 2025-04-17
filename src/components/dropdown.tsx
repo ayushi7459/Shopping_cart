@@ -6,7 +6,7 @@ const Dropdown_menu = () => {
 
     const DropdownElement = [];
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 4; i++) {
         DropdownElement.push(
             <div key={i}>
                 <select className='mt-2 p-1 w-100'>
