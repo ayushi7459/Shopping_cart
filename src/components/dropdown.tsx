@@ -30,15 +30,7 @@ const Dropdown_menu = () => {
             </div>
 
             {modalOpen && (
-                <div className="modal d-block" style={{
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: 1050
-                }}>
+                <div className="modal d-block modalDiv">
                     <div className="modal-dialog border border-info border-5 rounded-4 mt-5">
                         <div className="modal-content">
                             <div className="modal-header">
