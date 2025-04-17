@@ -25,7 +25,7 @@ const Dropdown_menu = () => {
 
     return (
         <div className='dropdown_page'>
-            <div className='border bg-primary d-flex justify-content-end'>
+            <div className='border bg-info d-flex justify-content-end'>
                 <button className='btn btn-secondary m-3 fw-normal' onClick={() => setModalOpen(true)}>Click</button>
             </div>
 
@@ -39,27 +39,19 @@ const Dropdown_menu = () => {
                     height: '100%',
                     zIndex: 1050
                 }}>
-                    <div className="modal-dialog">
+                    <div className="modal-dialog border border-info border-5 rounded-4 mt-5">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">Dropdown_List</h5>
                                 <button
-                                    type="button"
-                                    className="btn-close"
-                                    onClick={() => setModalOpen(false)}
-                                ></button>
+                                    type="button" className="btn-close" onClick={() => setModalOpen(false)}></button>
                             </div>
                             <div className="modal-body">
                                 {DropdownElement}
                             </div>
                             <div className="modal-footer">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={() => setModalOpen(false)}
-                                >
-                                    Close
-                                </button>
+                                <button type="button" className="btn btn-secondary" onClick={() => setModalOpen(false)}>Close</button>
+                                <button type="button" className="btn btn-primary" onClick={() => setModalOpen(false)}>Save changes</button>
                             </div>
                         </div>
                     </div>
