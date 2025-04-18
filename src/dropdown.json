@@ -1,112 +1,151 @@
 [
-    [
+        {
+            "id": 1,
+            "name": "Mammals",
+            "category":1
+        },
+        {
+            "id": 2,
+            "name": "Birds",
+            "category":1
+
+        },
+        {
+            "id": 3,
+            "name": "Reptiles",
+            "category":1
+
+        },
+        {
+            "id": 4,
+            "name": "Amphibians",
+            "category":1
+
+        },
+        {
+            "id": 5,
+            "name": "Fish",
+            "category":1
+
+        },
+    
         {
             "id": 6,
-            "name": "Mammals"
+            "name": "Laptop",
+            "category":2
+
         },
         {
             "id": 7,
-            "name": "Birds"
+            "name": "Phone",
+            "category":2
+
         },
         {
             "id": 8,
-            "name": "Reptiles"
+            "name": "Smart watches",
+            "category":2
+
+        },
+        {
+            "id": 9,
+            "name": "Airpods",
+            "category":2
+
         },
         {
             "id": 10,
-            "name": "Amphibians"
+            "name": "Speaker",
+            "category":2
+
         },
         {
             "id": 11,
-            "name": "Fish"
-        }
-    ],
-    [
+            "name": "India",
+            "category":3
+
+        },
         {
             "id": 12,
-            "name": "Laptop"
+            "name": "USA",
+            "category":3
+
         },
         {
             "id": 13,
-            "name": "Phone"
+            "name": "Canada",
+            "category":3
+
         },
         {
             "id": 14,
-            "name": "Smart watches"
+            "name": "Australia",
+            "category":3
+
         },
         {
             "id": 15,
-            "name": "Airpods"
+            "name": "Germany",
+            "category":3
+
         },
         {
             "id": 16,
-            "name": "Speaker"
-        }
-    ],
-    [
+            "name": "Red",
+            "category":4
+
+        },
         {
             "id": 17,
-            "name": "India"
+            "name": "Green",
+            "category":4
+
         },
         {
             "id": 18,
-            "name": "USA"
+            "name": "Blue",
+            "category":4
+
         },
         {
             "id": 19,
-            "name": "Canada"
+            "name": "Black",
+            "category":4
+
         },
         {
             "id": 20,
-            "name": "Australia"
+            "name": "White",
+            "category":4
+
+        },
+    {
+            "id": 21,
+            "name": "selenophile",
+            "category":5
+
         },
         {
-            "id": 21,
-            "name": "Germany"
-        }
-    ],
-    [
-        {
             "id": 22,
-            "name": "Red"
+            "name": "Astrophile",
+            "category":5
+
         },
         {
             "id": 23,
-            "name": "Green"
+            "name": "Nyctophile",
+            "category":5
+
         },
         {
             "id": 24,
-            "name": "Blue"
+            "name": "Ceraunophile",
+            "category":5
+
         },
         {
-            "id": 25,
-            "name": "Black"
-        },
-        {
-            "id": 26,
-            "name": "White"
+            "id": 25 ,
+            "name": "pluviophiles",
+            "category":5
         }
-    ],
-    [
-        {
-            "id": 27,
-            "name": "selenophile"
-        },
-        {
-            "id": 28,
-            "name": "Astrophile"
-        },
-        {
-            "id": 29,
-            "name": "Nyctophile"
-        },
-        {
-            "id": 30,
-            "name": "Ceraunophile"
-        },
-        {
-            "id": 31,
-            "name": "pluviophiles"
-        }
-    ]
 ]
