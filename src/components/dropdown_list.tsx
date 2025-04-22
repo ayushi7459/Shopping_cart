@@ -7,28 +7,34 @@ const Dropdowns = () => {
     const [count, setCount] = useState(1);
 
     const DropdownElement = [];
-    const selectedItem :string[] = []
+    // const selectedValue: Array<string> = [];
+    const selectedValue: { [key: number]: string } = {};
 
-    const handleChange =(e:ChangeEvent<HTMLSelectElement>)=>{
-        console.log(e.target.value);
-        selectedItem.push(e.target.value);
-        console.log(selectedItem)
-    }
+
+    const handleChange=(e:ChangeEvent<HTMLSelectElement>)=>{
+        const {category,name} = JSON.parse(e.target.value);
+        // console.log(JSON.parse(value)); 
+        selectedValue[category] = name;
+        console.log(selectedValue);
+        
+}
 
     for (let i = 0; i < count; i++) {
         const filtered = dropdown_list.filter((item) => {
             return item.category === i + 1;
         });
+    const first = selectedValue[1];
+    console.log(first);
         DropdownElement.push(
             <div key={dropdown_list[i].id}>
                 <select className='mt-2 p-1 w-100 border border-info' onChange={handleChange}>
                 <option value="" >Select...</option>
                     {filtered.map((items) => (
                         <option
-                        key={items.id}
-                        value={items.category}
+                            key={items.id}
+                            value={JSON.stringify({"category":items.category,"name":items.name})}
                         >{items.name}</option>
-                    ))} 
+                    ))}
                 </select>
             </div>
         )
@@ -67,7 +73,8 @@ const Dropdowns = () => {
                                     <button className='ml-3 btn btn-secondary shadow  rounded' onClick={handleIncrease}>+</button>
                                     <button className='ml-3 btn btn-secondary shadow  rounded' onClick={handleDecrease}>-</button>
                                     <button
-                                        type="button" className="btn-close" onClick={() => setModalOpen(false)}></button>
+                                        type="button" className="btn-close" onClick={() => setModalOpen(false)}>
+                                    </button>
                                 </div>
                                 <div className="modal-body">
                                     {DropdownElement}
