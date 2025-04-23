@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@coreui/coreui-pro": "^5.9.0",
+    "@coreui/react-pro": "^5.12.0",
     "@hookform/resolvers": "^5.0.1",
     "@reduxjs/toolkit": "^2.6.1",
     "antd": "^5.24.6",

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import dropdown_list from '../dropdown.json';
 import Select from 'react-select';
 
-
 const Dropdown_menu = () => {
 
     const [showModal, setShowModal] = useState(false);
@@ -17,30 +16,29 @@ const Dropdown_menu = () => {
         
         Dropdowns.push(
             <div key={i} className="mb-3">
-            <label className="form-label">Dropdown {i + 1}</label>
-
-                <Select
+                <Select 
+                    key={i}
                     className="form-multi-select"
                     id="ms1"
                     isMulti
                     data-coreui-search="global"
-                    options={filtered_list.map((option) => (
+                    options={filtered_list && filtered_list.map((option) => (
                         {
                             value: option.name,
                             label: option.name
                         }
                     ))}
                     onChange={(selectedOptions) =>
-                        setSelectedValues((prev) => ({
-                            ...prev,
+                        setSelectedValues((ele) => ({
+                            ...ele,
                             [i + 1]: selectedOptions ? selectedOptions.map((option) => option.value) : [],
                         }))
                     }
                 />
             </div>
         )
-        console.log(selectedValues);
     }
+    // console.log(selectedValues);
 
     const handleIncrease = () => {
         setCount(count + 1);
@@ -102,7 +100,6 @@ const Dropdown_menu = () => {
                     </div>
                 }
             </div>
-
         </div>
     )
 }

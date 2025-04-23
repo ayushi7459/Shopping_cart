@@ -5,9 +5,7 @@ import Dashboard from "./components/dashboard"
 import Carts from "./components/Carts"
 import './index.css';
 import List from "./components/listPage";
-// import 'react-select/dist/react-select.css';
-// import Dropdown_menu  from "./components/dropdown_list";
-import Dropdown_menu  from "./components/dropdown_list";
+import Dropdown_menu  from "./components/dropdown_list"
 
 
 const App=() =>{
