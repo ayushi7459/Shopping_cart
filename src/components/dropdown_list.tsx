@@ -1,43 +1,45 @@
 import { useState } from 'react';
 import rawDropdown from '../dropdown.json';
-// import makeAnimated from 'react-select/animated';
 import Select from 'react-select';
 
 type dropdownItems = {
-    name:string,
-    id:number,
-    category:number
+    name: string,
+    id: number,
+    category: number
 }
 
-const dropdown_list :dropdownItems[] = rawDropdown;
+type optionsType = {
+    value : string,
+    label: string
+}
+
+const dropdown_list: dropdownItems[] = rawDropdown;
 
 const Dropdown_menu = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [selectedValues, setSelectedValues] = useState<{ [key: number]: string[] }>({});
     const [count, setCount] = useState(1);
-    // const animatedComponents = makeAnimated();
 
-    
-    const storedOptions = localStorage.getItem("selected_values");
-    const Options = storedOptions ? JSON.parse(storedOptions): [];
+    const renderDropdowns = () => {
+        const storedOptions = localStorage.getItem("selected_values");
+        const Options = storedOptions ? JSON.parse(storedOptions) : [];
 
-    const renderDropdowns = () =>{
         let Dropdowns = [];
-        for (let i=0; i<=count; i++) {
-            const filtered_list = dropdown_list.filter((item) => (item.category === i + 1));
-            // console.log(filtered_list);
+
+        for (let i=0; i<count; i++) {
+
+            const filtered_list = dropdown_list.filter((item) => (item.category === i + 1))
 
             const options = filtered_list.map(option => ({
-                value: option.name,
-                label: option.name
-              }));
+                    value: option.name,
+                    label: option.name
+                }));
 
-            const preselectValues = Options[i+1] && Options[i+1].map((val:string)=>({
-                value:val,
-                label:val
-            }))
-            console.log("preselectValues:",preselectValues);
+            const preselectValues = Options[i + 1] && Options[i + 1].map((val: optionsType) => ({
+                    value: val,
+                    label: val
+                }))
 
             Dropdowns.push(
                 <div key={i} className="mb-3">
@@ -46,23 +48,18 @@ const Dropdown_menu = () => {
                         id="ms1"
                         isMulti
                         // isLoading
-                        // components={animatedComponents}
                         options={options}
                         defaultValue={preselectValues}
                         onChange={(selectedOptions) =>
                             setSelectedValues((ele) => ({
                                 ...ele,
-                                [i + 1]: selectedOptions ? selectedOptions.map((option) => option.value) : [],
-                            }))
-                        }
-                    />
+                                [i + 1]: selectedOptions ? selectedOptions.map((option:optionsType) => option.value) : [],
+                            }))} />
                 </div>
             )
         }
         return Dropdowns;
     }
-
-    // console.log(selectedValues);
 
     const handleIncrease = () => {
         setCount(count + 1);
@@ -72,14 +69,13 @@ const Dropdown_menu = () => {
         if (count < 1) {
             setShowModal(false);
         }
-    } 
+    }
+
 
     return (
         <div className='dropdown_page'>
             <div className="border bg-info d-flex justify-content-end">
-
-                <button className='btn btn-secondary m-3' onClick={() => { setShowModal(true) }}>Click
-                </button>
+                <button className='btn btn-secondary m-3' onClick={() => { setShowModal(true) }}>Click</button>
 
                 {showModal &&
                     <div className='modal d-block overlay'>
@@ -100,7 +96,7 @@ const Dropdown_menu = () => {
                                         onClick={() => {
                                             console.log('Selected Values:', selectedValues);
                                             setShowModal(false);
-                                            localStorage.setItem("selected_values" ,JSON.stringify(selectedValues));
+                                            localStorage.setItem("selected_values", JSON.stringify(selectedValues));
                                         }}> Save changes </button>
                                 </div>
                             </div>
