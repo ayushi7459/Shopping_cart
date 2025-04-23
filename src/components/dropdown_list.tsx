@@ -1,43 +1,45 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import dropdown_list from '../dropdown.json';
+import Select from 'react-select';
 
 
-const Dropdowns = () => {
-    const [modalOpen, setModalOpen] = useState(false);
+const Dropdown_menu = () => {
+
+    const [showModal, setShowModal] = useState(false);
+    const [selectedValues, setSelectedValues] = useState<{ [key: number]: string[] }>({});
     const [count, setCount] = useState(1);
 
-    const DropdownElement = [];
-    // const selectedValue: Array<string> = [];
-    const selectedValue: { [key: number]: string } = {};
+    let Dropdowns = [];
 
-
-    const handleChange=(e:ChangeEvent<HTMLSelectElement>)=>{
-        const {category,name} = JSON.parse(e.target.value);
-        // console.log(JSON.parse(value)); 
-        selectedValue[category] = name;
-        console.log(selectedValue);
+    for (let i=0; i<count; i++) {
+        const filtered_list = dropdown_list.filter((item) => (item.category === i + 1));
+        // console.log(filtered_list);
         
-}
+        Dropdowns.push(
+            <div key={i} className="mb-3">
+            <label className="form-label">Dropdown {i + 1}</label>
 
-    for (let i = 0; i < count; i++) {
-        const filtered = dropdown_list.filter((item) => {
-            return item.category === i + 1;
-        });
-    const first = selectedValue[1];
-    console.log(first);
-        DropdownElement.push(
-            <div key={dropdown_list[i].id}>
-                <select className='mt-2 p-1 w-100 border border-info' onChange={handleChange}>
-                <option value="" >Select...</option>
-                    {filtered.map((items) => (
-                        <option
-                            key={items.id}
-                            value={JSON.stringify({"category":items.category,"name":items.name})}
-                        >{items.name}</option>
+                <Select
+                    className="form-multi-select"
+                    id="ms1"
+                    isMulti
+                    data-coreui-search="global"
+                    options={filtered_list.map((option) => (
+                        {
+                            value: option.name,
+                            label: option.name
+                        }
                     ))}
-                </select>
+                    onChange={(selectedOptions) =>
+                        setSelectedValues((prev) => ({
+                            ...prev,
+                            [i + 1]: selectedOptions ? selectedOptions.map((option) => option.value) : [],
+                        }))
+                    }
+                />
             </div>
         )
+        console.log(selectedValues);
     }
 
     const handleIncrease = () => {
@@ -45,50 +47,64 @@ const Dropdowns = () => {
     }
     const handleDecrease = () => {
         setCount(count - 1);
-        if (count < 2) {
-            setModalOpen(false);
+        if (count < 1) {
+            setShowModal(false);
         }
     }
 
     return (
         <div className='dropdown_page'>
-            <div className='border bg-info d-flex justify-content-end'>
-                <button className='btn btn-secondary m-3 fw-normal' onClick={() => setModalOpen(true)}>Click</button>
-            </div>
+            <div className="border bg-info d-flex justify-content-end">
 
-            {
-                modalOpen && (
-                    <div className="modal d-block" style={{
-                        backgroundColor: 'rgba(0,0,0,0.5)',
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                    }}>
-                        <div className="modal-dialog border border-info border-5 rounded-4 mt-5">
-                            <div className="modal-content">
+                <button className='btn btn-secondary m-3' onClick={() => { setShowModal(true) }}>Click
+                </button>
+
+                {showModal &&
+                    <div className='modal d-block'
+                        style={{
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                        }}
+                    >
+                        <div className='modal-dialog mt-5'>
+                            <div className="modal-content border border-info border-5 rounded-4">
                                 <div className="modal-header">
-                                    <h5 className="modal-title">Dropdown_List</h5>
-                                    <button className='ml-3 btn btn-secondary shadow  rounded' onClick={handleIncrease}>+</button>
-                                    <button className='ml-3 btn btn-secondary shadow  rounded' onClick={handleDecrease}>-</button>
-                                    <button
-                                        type="button" className="btn-close" onClick={() => setModalOpen(false)}>
+                                    <h5 className="modal-title">Multi Select Dropdowns</h5>
+                                    <button className="btn btn-secondary mx-2" onClick={handleIncrease}>
+                                        +
                                     </button>
+                                    <button className="btn btn-secondary mx-2" onClick={handleDecrease}>
+                                        -
+                                    </button>
+                                    <button className="btn-close" onClick={() => setShowModal(false)} />
                                 </div>
-                                <div className="modal-body">
-                                    {DropdownElement}
-                                </div>
+                                <div className="modal-body">{Dropdowns}</div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" onClick={() => setModalOpen(false)}>Close</button>
-                                    <button type="button" className="btn btn-info" onClick={() => setModalOpen(false)}>Save changes</button>
+                                    <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
+                                        Close
+                                    </button>
+                                    <button
+                                        className="btn btn-info"
+                                        onClick={() => {
+                                            console.log('Selected Values:', selectedValues);
+                                            setShowModal(false);
+                                        }}
+                                    >
+                                        Save changes
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                )}
+                }
+            </div>
+
         </div>
     )
 }
 
-export default Dropdowns;
+export default Dropdown_menu
