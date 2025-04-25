@@ -2,6 +2,7 @@ import { useState } from 'react';
 import rawDropdown from '../dropdown.json';
 import Select from 'react-select';
 
+
 type dropdownItems = {
     name: string,
     id: number,
@@ -23,18 +24,16 @@ const Dropdown_menu = () => {
 
     const renderDropdowns = () => {
         const storedOptions = localStorage.getItem("selected_values");
-        const Options = storedOptions ? JSON.parse(storedOptions) : [];
-
+        const Options = storedOptions ? JSON.parse(storedOptions) : []
         let Dropdowns = [];
 
-        for (let i=0; i<count; i++) {
-
+        for (let i=0; i<=count; i++) {
             const filtered_list = dropdown_list.filter((item) => (item.category === i + 1))
 
-            const options = filtered_list.map(option => ({
+            const filtered_options = filtered_list.map(option => ({
                     value: option.name,
                     label: option.name
-                }));
+                }))
 
             const preselectValues = Options[i + 1] && Options[i + 1].map((val: optionsType) => ({
                     value: val,
@@ -47,14 +46,16 @@ const Dropdown_menu = () => {
                         className="form-multi-select"
                         id="ms1"
                         isMulti
-                        // isLoading
-                        options={options}
+                        
+                        placeholder = {`${filtered_options[0].value}...`}
+                        options={filtered_options}
                         defaultValue={preselectValues}
                         onChange={(selectedOptions) =>
-                            setSelectedValues((ele) => ({
-                                ...ele,
-                                [i + 1]: selectedOptions ? selectedOptions.map((option:optionsType) => option.value) : [],
-                            }))} />
+                            setSelectedValues((prevState) => {
+                                const updatedState = { ...prevState };
+                                updatedState[i + 1] = selectedOptions ? selectedOptions.map((option: optionsType) => option.value) : [];
+                                return updatedState;
+                            })} />
                 </div>
             )
         }
@@ -66,7 +67,7 @@ const Dropdown_menu = () => {
     }
     const handleDecrease = () => {
         setCount(count - 1);
-        if (count < 1) {
+        if (count <= 1) {
             setShowModal(false);
         }
     }

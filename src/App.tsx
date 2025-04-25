@@ -6,6 +6,7 @@ import Carts from "./components/Carts"
 import './index.css';
 import List from "./components/listPage";
 import Dropdown_menu  from "./components/dropdown_list"
+import OddEvenPair from "./components/questions";
 
 
 const App=() =>{
@@ -18,6 +19,7 @@ const App=() =>{
       <Route path="/cart" element={<Carts/>}/>
       <Route path="/userlist" element={<List/>}/>
       <Route path="/dropdown_menu" element={<Dropdown_menu/>}/>
+      <Route path="/questions" element={<OddEvenPair/>}/>
     </Routes>
   </BrowserRouter>
   </Provider>
