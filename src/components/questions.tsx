@@ -1,66 +1,120 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-const OddEvenPair = () =>{
-      const [input, setInput] = useState('');
-      const [oddEven,setOddEven] = useState<Array<string>>([]);
-      const [remainingOdd , setRemainingOdd] = useState<Array<string>>([]);
-      const [remainingEven , setRemainingEven] = useState<Array<string>>([]);
+const OddEvenPair = () => {
 
-    
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
 
-        console.log(input);
-        const array = input.split(" ");
-        console.log(array)
-        const even = array.filter((num) => Number(num) % 2 === 0);
-        const odd = array.filter((num)=>
-            Number(num) %2 !== 0
-        )
-        console.log("Type od odd",typeof(odd))
+const input = useRef<HTMLInputElement | null>(null);
+const fabonacciInput = useRef<HTMLInputElement | null>(null);
+const [fabonacciSeries,setFabonacciSeries] = useState<Array<number>>([]);
+const [primeSeries,setPrimeSeries] = useState<Array<number>>([]);
 
-        const n = Math.min(even.length , odd.length);
-        const result = [];
 
-        for(let i=0;i<n;i++){
-            result.push(`[${odd[i]},${even[n-i-1]}]`);
-        }
-        setOddEven(result);
+const handlePrime = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const number = Number(input.current?.value);
 
-        const leftOdd = odd.slice(n);
-        const leftEven = even.slice(0, even.length - n);
-
-        setRemainingOdd(leftOdd);
-        setRemainingEven(leftEven);
-        // console.log(oddEven);
-        console.log("Remaining Odd:", leftOdd);
-        console.log("Remaining Even:", leftEven);
-
-        setInput("");
+    if (number <= 1) {
+        setPrimeSeries([]);
+        return;
     }
 
-    return(
-            <div className="p-4 mx-auto">
-              <h4 className="font-bold mb-4">Odd-Even Pairing</h4>
-        
-              <form onSubmit={handleSubmit}>
-                <input type="text" className="p-2 mb-2" value={input} onChange={(e) => setInput(e.target.value)}
-                />
-                <button type="submit" className="bg-blue-500 text-black px-4 py-2 rounded">
-                  Submit
-                </button>
-              </form>
-        
-              <div className="mt-4">
-                <h4 className="font-semibold">Pairs (Odd, Even): {oddEven}</h4>
-        
-                <h4 className="font-semibold mt-4">Left odd: {remainingOdd.toString()}</h4>
-                <h4 className="font-semibold mt-4">Left even: {remainingEven.toString()}</h4>
-               
+    const series = [];
+    for (let i = 2; i <= number; i++) {
+        let isPrime = true;
+        for (let j = 2; j * j <= i; j++) {
+            if (i % j === 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        if (isPrime) {
+            series.push(i);
+        }
+    }
+    setPrimeSeries(series);
+}
 
-              </div>
+
+    const handleFabonacci =(e: React.FormEvent<HTMLFormElement>)=>{
+        
+        e.preventDefault();
+        const number = fabonacciInput.current?.value
+        const count = Number(number)
+        
+            if(count===0){
+                setFabonacciSeries([0])
+            }
+            if(count===1){
+                setFabonacciSeries([0,1])
+            }
+            else if (count>1){
+                let series = [0,1]
+                let sum = 0
+
+                for(let i=2; ;i++){
+                    sum = series[i-1] + series[i-2];
+                    if(sum > count){
+                        break;
+                    }
+                series.push(sum)
+                }
+                setFabonacciSeries(series);
+        }
+    }
+
+
+    return (
+        <div className="container py-5">
+        <div className="row justify-content-center">
+            {/* prime , composite number*/}
+            <div className="col-md-6 col-sm-12">
+                <div className="card shadow-sm">
+                    <div className="card-body">
+                        <h4 className="card-title mb-4 text-center">Prime number / composite number</h4>
+    
+                        <form onSubmit={handlePrime} className="d-flex flex-column gap-3">
+                            <input
+                                type="number"
+                                className="form-control w-50"
+                                placeholder="Enter numbers"
+                                ref={input}
+                            />
+                            <button type="submit" className="btn btn-primary fw-bold w-50"> Submit
+                            </button>
+                        </form>
+                        <div className="mt-3">{primeSeries.map((item,index)=>(
+                            <span key={index}>{item}, </span>
+                        ))}</div>
+                    </div>
+                </div>
             </div>
-          );
-        };
+
+            {/* fabonacci */}
+            <div className="col-md-6 col-sm-12">
+                <div className="card shadow-sm">
+                    <div className="card-body">
+                        <h4 className="card-title mb-4 text-center">Fabonacci Series</h4>
+
+                         <form onSubmit={handleFabonacci} className="d-flex flex-column gap-3">
+                            <input
+                                type="number"
+                                className="form-control w-50"
+                                placeholder="Enter numbers"
+                                ref={fabonacciInput}
+                            />
+                            <button
+                                type="submit"  className="btn btn-warning w-50 fw-bold"> Submit
+                            </button>
+                        </form>
+                        <div className="mt-3">{fabonacciSeries.map((item,index)=>(
+                            <span key={index}>{item}, </span>
+                        ))}</div>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    );
+};
 
 export default OddEvenPair;
