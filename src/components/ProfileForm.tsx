@@ -4,6 +4,7 @@ import { EditOutlined } from '@ant-design/icons';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import locationData from '../location.json';
+import Password from "antd/es/input/Password";
 
 
 type FormData = {
@@ -13,6 +14,7 @@ type FormData = {
   city:string;
   state:string;
   zip:number;
+  password:string;
 }
 
 type Props = {
@@ -28,15 +30,20 @@ type LocationData = {
 
 
 const data = locationData as LocationData;
+let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+let regexEmail = /^[a-zA-Z0-9](?!.*\.\.)[a-zA-Z0-9._-]{0,62}[a-zA-Z0-9]@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-
+ 
 const ProfileSchema = yup.object().shape({
   image: yup.string().min(5, "upload valid image").required("This field is required"),
-  email: yup.string().email("invalid email").required("This field is required"),
+  email: yup.string()
+  .matches(regexEmail, "Invalid email format")
+  .required("This field is required"),
   city: yup.string().required("This field is required"),
   state: yup.string().required("This field is required"),
   country: yup.string().required("This field is required"),
   zip: yup.number().required("This field is required").min(5, "Zip should be 5 number"),
+  password: yup.string().matches(regexPassword, "Password must contain at least 8 characters, including uppercase, lowercase, numbers and a special character").required("This field is required")
 })
 
 
@@ -142,6 +149,12 @@ const ProfileForm = ({ onClose }: Props) => {
             <label htmlFor={"inputEmail4"}>Email:</label>
             <input {...register("email")} type="email" className="form-control" id="inputEmail4" placeholder="Email" />
             {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor={"inputPassword4"}>Email:</label>
+            <input {...register("password")} type="password" className="form-control" id="inputPassword4" placeholder="Password" />
+            {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
           </div>
 
           {/*Country */}
