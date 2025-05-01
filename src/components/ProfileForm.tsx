@@ -4,17 +4,16 @@ import { EditOutlined } from '@ant-design/icons';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import locationData from '../location.json';
-import Password from "antd/es/input/Password";
 
 
 type FormData = {
-  image:string;
-  email:string;
-  country:string;
-  city:string;
-  state:string;
-  zip:number;
-  password:string;
+  image: string;
+  email: string;
+  country: string;
+  city: string;
+  state: string;
+  zip: number;
+  password: string;
 }
 
 type Props = {
@@ -30,6 +29,8 @@ type LocationData = {
 
 
 const data = locationData as LocationData;
+
+//validation using regex
 let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
 let regexEmail = /^[a-zA-Z0-9](?!.*\.\.)[a-zA-Z0-9._-]{0,62}[a-zA-Z0-9]@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
@@ -37,13 +38,31 @@ let regexEmail = /^[a-zA-Z0-9](?!.*\.\.)[a-zA-Z0-9._-]{0,62}[a-zA-Z0-9]@[a-zA-Z0
 const ProfileSchema = yup.object().shape({
   image: yup.string().min(5, "upload valid image").required("This field is required"),
   email: yup.string()
-  .matches(regexEmail, "Invalid email format")
+  .matches(regexEmail, "Invalid email format") // regex
   .required("This field is required"),
-  city: yup.string().required("This field is required"),
-  state: yup.string().required("This field is required"),
   country: yup.string().required("This field is required"),
+  state: yup.string()
+    .default("")
+    .transform((value) => value ?? "")
+    .when("country", {
+      is: (val: string) => val?.length > 0,
+      then: (schema) => schema.required("State is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+
+  city: yup.string()
+    .default("")
+    .transform((value) => value ?? "")
+    .when("state", {
+      is: (val: string) => val?.length > 0,
+      then: (schema) => schema.required("City is required"),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+
   zip: yup.number().required("This field is required").min(5, "Zip should be 5 number"),
-  password: yup.string().matches(regexPassword, "Password must contain at least 8 characters, including uppercase, lowercase, numbers and a special character").required("This field is required")
+  password: yup.string().matches(regexPassword, `Password must contain at least
+    8 characters, including uppercase, lowercase, numbers and a special character`) // regex
+    .required("This field is required")
 })
 
 
@@ -152,7 +171,7 @@ const ProfileForm = ({ onClose }: Props) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor={"inputPassword4"}>Email:</label>
+            <label htmlFor={"inputPassword4"}>Password:</label>
             <input {...register("password")} type="password" className="form-control" id="inputPassword4" placeholder="Password" />
             {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
           </div>
@@ -173,7 +192,7 @@ const ProfileForm = ({ onClose }: Props) => {
                 <option key={index}>{location.country}</option>
               ))}
             </select>
-            {errors.city && <p style={{ color: "red" }}>{errors.city.message}</p>}
+            {errors.country && <p style={{ color: "red" }}>{errors.country.message}</p>}
           </div>
 
           {/*State */}
