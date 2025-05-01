@@ -4,6 +4,9 @@ import { EditOutlined } from '@ant-design/icons';
 import { yupResolver } from "@hookform/resolvers/yup";
 import locationData from '../location.json';
 import ProfileSchema from "../features/profileSchema";
+import bcrypt from 'bcryptjs';
+import Password from "antd/es/input/Password";
+
 
 
 type FormData = {
@@ -82,8 +85,13 @@ const ProfileForm = ({ onClose }: Props) => {
 
 
   const onSubmit = (data: FormData) => {
+    // decrypt password before save
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(data.password,salt);
+
     const userData = {
       ...data,
+      password:hashedPassword,
       isLoggedin: true,
     };
     localStorage.setItem("user", JSON.stringify(userData));
