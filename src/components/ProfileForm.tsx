@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { EditOutlined } from '@ant-design/icons';
-import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import locationData from '../location.json';
+import ProfileSchema from "../features/profileSchema";
 
 
 type FormData = {
@@ -27,48 +27,11 @@ type LocationData = {
   cities:{country:string; state:string; city:string}[]
 }
 
-
 const data = locationData as LocationData;
-
-//validation using regex
-let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
-let regexEmail = /^[a-zA-Z0-9](?!.*\.\.)[a-zA-Z0-9._-]{0,62}[a-zA-Z0-9]@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
- 
-const ProfileSchema = yup.object().shape({
-  image: yup.string().min(5, "upload valid image").required("This field is required"),
-  email: yup.string()
-  .matches(regexEmail, "Invalid email format") // regex
-  .required("This field is required"),
-  country: yup.string().required("This field is required"),
-  state: yup.string()
-    .default("")
-    .transform((value) => value ?? "")
-    .when("country", {
-      is: (val: string) => val?.length > 0,
-      then: (schema) => schema.required("State is required"),
-      otherwise: (schema) => schema.notRequired(),
-    }),
-
-  city: yup.string()
-    .default("")
-    .transform((value) => value ?? "")
-    .when("state", {
-      is: (val: string) => val?.length > 0,
-      then: (schema) => schema.required("City is required"),
-      otherwise: (schema) => schema.notRequired(),
-    }),
-
-  zip: yup.number().required("This field is required").min(5, "Zip should be 5 number"),
-  password: yup.string().matches(regexPassword, `Password must contain at least
-    8 characters, including uppercase, lowercase, numbers and a special character`) // regex
-    .required("This field is required")
-})
-
 
 const ProfileForm = ({ onClose }: Props) => {
 
-  
+
   const userData = localStorage.getItem("user");
   const getUser = userData ? JSON.parse(userData) : null;
   const [selectedCountry, setSelectedCountry] = useState("");
