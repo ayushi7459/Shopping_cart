@@ -5,7 +5,7 @@ const ListPage = () => {
     const [users, setUsers] = useState<any[]>([]);
     const [allUsers, setAllUsers] = useState<any[]>([]); 
     const [isChecked , setIsChecked] = useState<boolean>(false);
-    let [checkedList, setCheckedList] = useState<Array<string>>([]);
+    const [checkedList, setCheckedList] = useState<Array<string>>([]);
 
     const fetchUser = async () => {
         const data = await fetch("https://dummyjson.com/users");
@@ -43,7 +43,7 @@ const ListPage = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, checked } = e.target;
-    
+        
         if (name === "allSelect") {
             setIsChecked(checked);
             const allIds = users.map((user) => user.id.toString());
@@ -60,7 +60,6 @@ const ListPage = () => {
             }
     };
     
-
     const handleDelete = () => {
         const filteredUsers = users.filter(
             (user) => !checkedList.includes(user.id.toString())
@@ -70,7 +69,7 @@ const ListPage = () => {
     
         setCheckedList([]);
         setIsChecked(false);
-    };
+    }
     
     
 
@@ -154,6 +153,7 @@ const ListPage = () => {
                                 type="checkbox"
                                 className="form-check-input ml-3"
                                 name="allSelect"
+                                checked={isChecked}
                                 onChange={handleChange}
                                 />
                             </th>
@@ -171,8 +171,8 @@ const ListPage = () => {
                                     type="checkbox" 
                                     className="form-check-input ml-3"
                                     name={user.id.toString()}
-                                    checked={checkedList.includes(user.id.toString())}
                                     onChange={handleChange}
+                                    checked={checkedList.includes(user.id.toString())}
                                     />
                                 </td>
                                 <td>{user.firstName}</td>
