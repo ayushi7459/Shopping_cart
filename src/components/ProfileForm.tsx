@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Resolver, useForm } from "react-hook-form";
 import { EditOutlined } from '@ant-design/icons';
 import { yupResolver } from "@hookform/resolvers/yup";
 import locationData from '../location.json';
 import ProfileSchema from "../features/profileSchema";
 import bcrypt from 'bcryptjs';
-import Password from "antd/es/input/Password";
-
-
 
 type FormData = {
   image: string;
@@ -16,13 +13,14 @@ type FormData = {
   city: string;
   state: string;
   zip: number;
-  password: string;
+  password?: string;
+  subscribe:boolean
 }
+
 
 type Props = {
   onClose: () => void;
 }
-
 
 type LocationData = {
   countries : {country:string}[];
@@ -40,6 +38,7 @@ const ProfileForm = ({ onClose }: Props) => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
 
 
   const {
@@ -49,7 +48,7 @@ const ProfileForm = ({ onClose }: Props) => {
     setValue,
     formState: { errors }
   } = useForm<FormData>({
-    resolver: yupResolver(ProfileSchema),
+    resolver: yupResolver(ProfileSchema) as Resolver<FormData>,
   });
   
 
@@ -68,7 +67,8 @@ const ProfileForm = ({ onClose }: Props) => {
     else {
       reset();
     }
-  }, []);
+    register("subscribe");
+  }, [register]);
 
 
   const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,15 +85,27 @@ const ProfileForm = ({ onClose }: Props) => {
 
 
   const onSubmit = (data: FormData) => {
-    // decrypt password before save
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(data.password,salt);
-
-    const userData = {
+    // console.log("submit");
+    let userData;
+    const salt = bcrypt.genSaltSync(11);
+    let hashedPassword
+    if(data.password){
+     hashedPassword= bcrypt.hashSync(data.password,salt);
+     userData = {
       ...data,
       password:hashedPassword,
       isLoggedin: true,
+      Subscribtion:isSubscribed
     };
+    }
+    else{
+      userData = {
+        ...data,
+        isLoggedin: true,
+        Subscribtion:isSubscribed
+      };
+    }
+
     localStorage.setItem("user", JSON.stringify(userData));
     reset();
     setSelectedCountry("");
@@ -135,18 +147,40 @@ const ProfileForm = ({ onClose }: Props) => {
             }
             {errors.image && <p style={{ color: "red" }}>{errors.image.message}</p>}
           </div>
+
+          {/* subscription */}
+          <div>
+          <button
+              type="button"
+              className={`btn ${isSubscribed ? "btn-danger" : "btn-secondary"} m-4`}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsSubscribed(!isSubscribed);
+                setValue("subscribe", !isSubscribed);
+              }}
+            >
+              {isSubscribed ? "🔔 Subscribed" : "Subscribe"}
+            </button>
+
+          </div>
+
+          {/* email */}
           <div className="form-group">
             <label htmlFor={"inputEmail4"}>Email:</label>
             <input {...register("email")} type="email" className="form-control" id="inputEmail4" placeholder="Email" />
-            {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
+            {errors.email && <p style={{ color: "red", fontSize:"8px"}}>{errors.email.message}</p>}
           </div>
 
-          <div className="form-group">
+          {/* password */}
+          {
+            isSubscribed &&
+            <div className="form-group">
             <label htmlFor={"inputPassword4"}>Password:</label>
             <input {...register("password")} type="password" className="form-control" id="inputPassword4" placeholder="Password" />
-            {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
+            {errors.password && <p style={{ color: "red",fontSize:"10px" }}>{errors.password.message}</p>}
           </div>
-
+          }
+         
           {/*Country */}
           <div className="form-group">
             <label htmlFor="inputCountry">Country:</label>
@@ -163,7 +197,7 @@ const ProfileForm = ({ onClose }: Props) => {
                 <option key={index}>{location.country}</option>
               ))}
             </select>
-            {errors.country && <p style={{ color: "red" }}>{errors.country.message}</p>}
+            {errors.country && <p style={{ color: "red", fontSize:"8px" }}>{errors.country.message}</p>}
           </div>
 
           {/*State */}
@@ -185,7 +219,7 @@ const ProfileForm = ({ onClose }: Props) => {
                 ))}
 
             </select>
-            {errors.state && <p style={{ color: "red" }}>{errors.state.message}</p>}
+            {errors.state && <p style={{ color: "red" , fontSize:"8px"}}>{errors.state.message}</p>}
           </div>
 
           {/*City */}
@@ -205,19 +239,23 @@ const ProfileForm = ({ onClose }: Props) => {
                   </option>
                 ))}
             </select>
-            {errors.city && <p style={{ color: "red" }}>{errors.city.message}</p>}
+            {errors.city && <p style={{ color: "red", fontSize:"8px" }}>{errors.city.message}</p>}
           </div>
+
+          {/* zip */}
           <div className="form-group">
             <label htmlFor="inputZip">Zip:</label>
             <input {...register("zip")} type="text" className="form-control" id="inputZip" />
-            {errors.zip && <p style={{ color: "red" }}>{errors.zip.message}</p>}
+            {errors.zip && <p style={{ color: "red", fontSize:"8px" }}>{errors.zip.message}</p>}
           </div>
+          
           <button type="submit" className="btn btn-outline-primary mt-3">Submit details</button>
         </div>
       </form>
     </>
   )
 }
+
 
 
 export default ProfileForm

@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { DeleteFilled } from '@ant-design/icons'
 
 const ListPage = () => {
     const [users, setUsers] = useState<any[]>([]);
     const [allUsers, setAllUsers] = useState<any[]>([]); 
+    const [isChecked , setIsChecked] = useState<boolean>(false);
+    let [checkedList, setCheckedList] = useState<Array<string>>([]);
 
     const fetchUser = async () => {
         const data = await fetch("https://dummyjson.com/users");
@@ -25,20 +28,50 @@ const ListPage = () => {
     };
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>{
-        // console.log(e.target.value);
         const search = e.target.value;
         const searchValue = search.toLowerCase();
         if(search.trim() != ""){
             const filtered = allUsers.filter((user)=>{
                return user.firstName.toLowerCase().includes(searchValue);
             })
-            // console.log("->",filtered);
             setUsers(filtered);
         }
         else{
             setUsers(allUsers);
         }
     }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, checked } = e.target;
+    
+        if (name === "allSelect") {
+            setIsChecked(checked);
+            const allIds = users.map((user) => user.id.toString());
+            setCheckedList(checked ? allIds : []);
+        }
+        else {
+                let updatedList = [...checkedList];
+                if (checked) {
+                    updatedList.push(name);
+                } else {
+                    updatedList = updatedList.filter((id) => id !== name);
+                }
+                setCheckedList(updatedList);
+            }
+    };
+    
+
+    const handleDelete = () => {
+        const filteredUsers = users.filter(
+            (user) => !checkedList.includes(user.id.toString())
+        );
+        setUsers(filteredUsers);
+        setAllUsers(filteredUsers);
+    
+        setCheckedList([]);
+        setIsChecked(false);
+    };
+    
     
 
     return (
@@ -89,6 +122,10 @@ const ListPage = () => {
                                     </ul>
                                 </li>
                             </ul>
+                            <div className='mr-4'>
+                                <button className='btn btn-primary' onClick={handleDelete}><DeleteFilled /></button>
+                          
+                            </div>
                             <form className="d-flex">
                                 <input
                                     className="form-control me-2"
@@ -112,7 +149,14 @@ const ListPage = () => {
                 <table className="table table-bordered">
                     <thead className="thead-dark">
                         <tr>
-                            <th scope="col">S.no</th>
+                            <th className='d-flex'>
+                                <input
+                                type="checkbox"
+                                className="form-check-input ml-3"
+                                name="allSelect"
+                                onChange={handleChange}
+                                />
+                            </th>
                             <th scope="col">First Name</th>
                             <th scope="col">Age</th>
                             <th scope="col">Gender</th>
@@ -120,9 +164,17 @@ const ListPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user, index) => (
+                        {users.map((user) => (
                             <tr key={user.id}>
-                                <th>{index + 1}</th>
+                                 <td className='d-flex'>
+                                    <input
+                                    type="checkbox" 
+                                    className="form-check-input ml-3"
+                                    name={user.id.toString()}
+                                    checked={checkedList.includes(user.id.toString())}
+                                    onChange={handleChange}
+                                    />
+                                </td>
                                 <td>{user.firstName}</td>
                                 <td>{user.age}</td>
                                 <td>{user.gender}</td>
@@ -137,3 +189,17 @@ const ListPage = () => {
 };
 
 export default ListPage;
+
+//i want to delete the selected value on click on deleted button
+
+
+
+// else {
+//     if (checked) {
+//         checkedList.push(name);
+//         // console.log(checkedList);
+//     } else {
+//          checkedList = checkedList.filter((id) => id !== name);
+//     }
+//     setCheckedList(checkedList);
+// }

@@ -34,7 +34,6 @@ const handlePrime = (e: React.FormEvent<HTMLFormElement>) => {
         setPrimeSeries(series);
     }
 
-
     const handleFabonacci = (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault();
@@ -61,7 +60,6 @@ const handlePrime = (e: React.FormEvent<HTMLFormElement>) => {
             setFabonacciSeries(series);
         }
     }
-
 
     return (
         <div className="container py-5">
